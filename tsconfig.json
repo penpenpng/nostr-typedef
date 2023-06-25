@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "strict": true
+  },
+  "include": ["index.d.ts"]
+}

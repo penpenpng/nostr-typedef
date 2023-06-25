@@ -1,0 +1,35 @@
+{
+  "name": "nostr-typedef",
+  "version": "0.1.0",
+  "description": "Type definitions for Nostr applications",
+  "author": "penpenpng",
+  "keywords": [
+    "nostr"
+  ],
+  "homepage": "https://github.com/penpenpng/nostr-typedef/",
+  "bugs": {
+    "url": "https://github.com/penpenpng/nostr-typedef/issues"
+  },
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "files": [
+    "index.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/penpenpng/nostr-typedef.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint index.d.ts && prettier --check index.d.ts",
+    "lint:fix": "eslint --fix index.d.ts && prettier --write index.d.ts"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.0"
+  }
+}
