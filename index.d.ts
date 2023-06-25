@@ -58,7 +58,7 @@ export enum Kind {
   NostrConnect = 24133,
   HttpAuth = 27235,
   CategorizedPeopleList = 30000,
-  GategorizedBookmarkList = 30001,
+  CategorizedBookmarkList = 30001,
   ProfileBadges = 30008,
   BadgeDefinition = 30009,
   CreateOrUpdateStall = 30017,
