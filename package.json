@@ -20,7 +20,6 @@
     "url": "https://github.com/penpenpng/nostr-typedef.git"
   },
   "scripts": {
-    "build": "tsc",
     "lint": "eslint index.d.ts && prettier --check index.d.ts",
     "lint:fix": "eslint --fix index.d.ts && prettier --write index.d.ts"
   },
