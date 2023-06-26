@@ -69,11 +69,8 @@ export enum Kind {
   HandlerInformation = 31990,
 }
 
-type Chars<S extends string> = S extends `${infer Head}${infer Tail}`
-  ? Uppercase<Head> | Lowercase<Head> | Chars<Tail>
-  : never;
-// cf. NIP-12
-export type TagName = `#${Chars<"abcdefghijklmnopqrstuvwxyz">}`;
+/** Key for tag query. Normally only the form `#` followed by a single-letter is permitted. See also [NIP-12](https://github.com/nostr-protocol/nips/blob/master/12.md). */
+export type TagName = `#${string}`;
 
 export type Filter = {
   ids?: string[];
