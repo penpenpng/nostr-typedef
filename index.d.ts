@@ -82,6 +82,7 @@ export type Filter = {
   since?: number;
   until?: number;
   limit?: number;
+  search?: string; // cf. NIP-50
 } & {
   [key in TagName]?: string[];
 };
