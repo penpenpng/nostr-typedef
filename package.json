@@ -11,6 +11,7 @@
     "url": "https://github.com/penpenpng/nostr-typedef/issues"
   },
   "license": "MIT",
+  "main": "./index.d.ts",
   "types": "./index.d.ts",
   "files": [
     "index.d.ts"
