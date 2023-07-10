@@ -84,41 +84,64 @@ export type Filter = {
   [key in TagName]?: string[];
 };
 
-interface CountResponse {
-  count: number;
-}
-
+/** JSON messages sent from clients to relays via WebSocket, and related types. */
 export namespace ToRelayMessage {
+  /** Possbile messages from relays to clients. */
   export type Any = AUTH | CLOSE | COUNT | EVENT | REQ;
+  /** Message type, which is put at the first of message tuples. */
+  export type Type = Any[0];
+  /** Map message type to message. */
   export type Message<T extends Type> = {
     [T in Any as T[0]]: T;
   }[T];
-  export type Type = Any[0];
+
+  /** AUTH message. See also [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md). */
   export type AUTH = [type: "AUTH", event: Event<Kind.ClientAuthentication>];
+  /** CLOSE message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type CLOSE = [type: "CLOSE", subId: string];
+  /** COUNT message. See also [NIP-45](https://github.com/nostr-protocol/nips/blob/master/45.md). */
   export type COUNT = [type: "COUNT", subId: string, ...filters: Filter[]];
+  /** EVENT message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type EVENT = [type: "EVENT", event: Event];
+  /** REQ message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type REQ = [type: "REQ", subId: string, ...filters: Filter[]];
 }
 
+/** JSON messages sent from relays to clients via WebSocket, and related types. */
 export namespace ToClientMessage {
+  /** Possbile messages from clients to relays. */
   export type Any = AUTH | COUNT | EOSE | EVENT | NOTICE | OK;
+  /** Message type, which is put at the first of message tuples. */
+  export type Type = Any[0];
+  /** Map message type to message. */
   export type Message<T extends Type> = {
     [T in Any as T[0]]: T;
   }[T];
-  export type Type = Any[0];
+
+  /** Message types exchanged in REQ subscriptions. */
   export type Sub = EVENT | EOSE;
+
+  /** AUTH message. See also [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md). */
   export type AUTH = [type: "AUTH", challengeMessage: string];
+  /** COUNT message. See also [NIP-45](https://github.com/nostr-protocol/nips/blob/master/45.md). */
   export type COUNT = [type: "COUNT", subId: string, count: CountResponse];
+  /** EOSE message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type EOSE = [type: "EOSE", subId: string];
+  /** EVENT message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type EVENT = [type: "EVENT", subId: string, event: Event];
+  /** NOTICE message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type NOTICE = [type: "NOTICE", message: string];
+  /** OK message. See also [NIP-20](https://github.com/nostr-protocol/nips/blob/master/20.md). */
   export type OK = [
     type: "OK",
     eventId: string,
     succeeded: boolean,
     message?: string
   ];
+
+  interface CountResponse {
+    count: number;
+  }
 }
 
 export namespace Nip07 {
