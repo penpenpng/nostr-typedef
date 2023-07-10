@@ -90,6 +90,9 @@ interface CountResponse {
 
 export namespace ToRelayMessage {
   export type Any = AUTH | CLOSE | COUNT | EVENT | REQ;
+  export type Message<T extends Type> = {
+    [T in Any as T[0]]: T;
+  }[T];
   export type Type = Any[0];
   export type AUTH = [type: "AUTH", event: Event<Kind.ClientAuthentication>];
   export type CLOSE = [type: "CLOSE", subId: string];
@@ -100,6 +103,9 @@ export namespace ToRelayMessage {
 
 export namespace ToClientMessage {
   export type Any = AUTH | COUNT | EOSE | EVENT | NOTICE | OK;
+  export type Message<T extends Type> = {
+    [T in Any as T[0]]: T;
+  }[T];
   export type Type = Any[0];
   export type Sub = EVENT | EOSE;
   export type AUTH = [type: "AUTH", challengeMessage: string];
