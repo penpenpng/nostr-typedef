@@ -1,4 +1,4 @@
-export interface Event<K extends Kind | number = number> {
+export interface Event<K extends number = number> {
   id: string;
   sig: string;
   kind: K;
@@ -8,7 +8,7 @@ export interface Event<K extends Kind | number = number> {
   created_at: number;
 }
 
-export interface UnsignedEvent<K extends Kind | number = number> {
+export interface UnsignedEvent<K extends number = number> {
   kind: K;
   tags: string[][];
   pubkey: string;
@@ -16,7 +16,7 @@ export interface UnsignedEvent<K extends Kind | number = number> {
   created_at: number;
 }
 
-export interface EventParameters<K extends Kind | number = number> {
+export interface EventParameters<K extends number = number> {
   id?: string;
   sig?: string;
   kind: K;
@@ -26,43 +26,43 @@ export interface EventParameters<K extends Kind | number = number> {
   created_at?: number;
 }
 
-export enum Kind {
+export namespace Kind {
   /**
    * Contains a JSON object describing the user who created the event.
    *
    * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#basic-event-kinds).
    */
-  Metadata = 0,
+  export type Metadata = 0;
   /**
    * Contains a plaintext content of a note. Client should not parse the content according to any special rules.
    *
    * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#basic-event-kinds).
    */
-  Text = 1,
+  export type Text = 1;
   /**
    * Contains the URL of a relay that the event creator wants to recommend to its followers.
    *
    * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#basic-event-kinds).
    */
-  RecommendRelay = 2,
+  export type RecommendRelay = 2;
   /**
    * Contains a followee list defined as having a list of `p` tags.
    *
    * See also [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md).
    */
-  Contacts = 3,
+  export type Contacts = 3;
   /**
    * Contains an encrypted direct message.
    *
    * See also [NIP-04](https://github.com/nostr-protocol/nips/blob/master/04.md).
    */
-  EncryptedDirectMessage = 4,
+  export type EncryptedDirectMessage = 4;
   /**
    * Contains a deletion request defined as having a list of `e` tags.
    *
    * See also [NIP-09](https://github.com/nostr-protocol/nips/blob/master/09.md).
    */
-  EventDeletion = 5,
+  export type EventDeletion = 5;
   /**
    * Contains a kind1 (`Kind.Text`) event JSON that the user wants to share.
    * It should be used for "pure" repost. Use kind1 for quote reposts,
@@ -70,7 +70,7 @@ export enum Kind {
    *
    * See also [NIP-18](https://github.com/nostr-protocol/nips/blob/master/18.md).
    */
-  Repost = 6,
+  export type Repost = 6;
   /**
    * Contains a reaction to other events.
    * It can contain "+" or "-" string, or an emoji,
@@ -78,7 +78,7 @@ export enum Kind {
    *
    * See also [NIP-25](https://github.com/nostr-protocol/nips/blob/master/25.md).
    */
-  Reaction = 7,
+  export type Reaction = 7;
   /**
    * Contains a single `a` tag referencing BadgeDefinition event
    * and one or more `p` tag, one for each pubkey the badge issuer wishes to award.
@@ -86,44 +86,44 @@ export enum Kind {
    * See also kind30009 (`Kind.BadgeDefinition`), kind30008 (`Kind.ProfileBadges`),
    * and [NIP-58](https://github.com/nostr-protocol/nips/blob/master/58.md)
    */
-  BadgeAward = 8,
+  export type BadgeAward = 8;
   /**
    * Contains an event JSON that the user wants to share.
    * It should be used for non-kind1 events. Use kind6 (`Kind.Repost`) to share kind1 (`Kind.Text`) events.
    *
    * See also [NIP-18](https://github.com/nostr-protocol/nips/blob/master/18.md)
    */
-  GenericRepost = 16,
-  ChannelCreation = 40,
-  ChannelMetadata = 41,
-  ChannelMessage = 42,
-  ChannelHideMessage = 43,
-  ChannelMuteUser = 44,
-  Blank = 255,
-  FileMetadata = 1063,
-  Reporting = 1984,
-  Label = 1985,
-  ZapRequest = 9734,
-  Zap = 9735,
-  MuteList = 10000,
-  PinList = 10001,
-  RelayListMetadata = 10002,
-  WalletInfo = 13194,
-  ClientAuthentication = 22242,
-  WalletRequest = 23194,
-  WalletResponse = 23195,
-  NostrConnect = 24133,
-  HttpAuth = 27235,
-  CategorizedPeopleList = 30000,
-  CategorizedBookmarkList = 30001,
-  ProfileBadges = 30008,
-  BadgeDefinition = 30009,
-  CreateOrUpdateStall = 30017,
-  CreateOrUpdateProduct = 30018,
-  LongFormContent = 30023,
-  ApplicationSpecificData = 30078,
-  HandlerRecommendation = 31989,
-  HandlerInformation = 31990,
+  export type GenericRepost = 16;
+  export type ChannelCreation = 40;
+  export type ChannelMetadata = 41;
+  export type ChannelMessage = 42;
+  export type ChannelHideMessage = 43;
+  export type ChannelMuteUser = 44;
+  export type Blank = 255;
+  export type FileMetadata = 1063;
+  export type Reporting = 1984;
+  export type Label = 1985;
+  export type ZapRequest = 9734;
+  export type Zap = 9735;
+  export type MuteList = 10000;
+  export type PinList = 10001;
+  export type RelayListMetadata = 10002;
+  export type WalletInfo = 13194;
+  export type ClientAuthentication = 22242;
+  export type WalletRequest = 23194;
+  export type WalletResponse = 23195;
+  export type NostrConnect = 24133;
+  export type HttpAuth = 27235;
+  export type CategorizedPeopleList = 30000;
+  export type CategorizedBookmarkList = 30001;
+  export type ProfileBadges = 30008;
+  export type BadgeDefinition = 30009;
+  export type CreateOrUpdateStall = 30017;
+  export type CreateOrUpdateProduct = 30018;
+  export type LongFormContent = 30023;
+  export type ApplicationSpecificData = 30078;
+  export type HandlerRecommendation = 31989;
+  export type HandlerInformation = 31990;
 }
 
 /**
