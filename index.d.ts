@@ -1,4 +1,4 @@
-export interface Event<K = number> {
+export interface Event<K extends Kind | number = number> {
   id: string;
   sig: string;
   kind: K;
@@ -8,7 +8,7 @@ export interface Event<K = number> {
   created_at: number;
 }
 
-export interface UnsignedEvent<K = number> {
+export interface UnsignedEvent<K extends Kind | number = number> {
   kind: K;
   tags: string[][];
   pubkey: string;
@@ -16,7 +16,7 @@ export interface UnsignedEvent<K = number> {
   created_at: number;
 }
 
-export interface EventParameters<K = number> {
+export interface EventParameters<K extends Kind | number = number> {
   id?: string;
   sig?: string;
   kind: K;
@@ -27,15 +27,72 @@ export interface EventParameters<K = number> {
 }
 
 export enum Kind {
+  /**
+   * Contains a JSON object describing the user who created the event.
+   *
+   * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#basic-event-kinds).
+   */
   Metadata = 0,
+  /**
+   * Contains a plaintext content of a note. Client should not parse the content according to any special rules.
+   *
+   * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#basic-event-kinds).
+   */
   Text = 1,
+  /**
+   * Contains the URL of a relay that the event creator wants to recommend to its followers.
+   *
+   * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#basic-event-kinds).
+   */
   RecommendRelay = 2,
+  /**
+   * Contains a followee list defined as having a list of `p` tags.
+   *
+   * See also [NIP-02](https://github.com/nostr-protocol/nips/blob/master/02.md).
+   */
   Contacts = 3,
+  /**
+   * Contains an encrypted direct message.
+   *
+   * See also [NIP-04](https://github.com/nostr-protocol/nips/blob/master/04.md).
+   */
   EncryptedDirectMessage = 4,
+  /**
+   * Contains a deletion request defined as having a list of `e` tags.
+   *
+   * See also [NIP-09](https://github.com/nostr-protocol/nips/blob/master/09.md).
+   */
   EventDeletion = 5,
+  /**
+   * Contains a kind1 (`Kind.Text`) event JSON that the user wants to share.
+   * It should be used for "pure" repost. Use kind1 for quote reposts,
+   * or kind16 (`Kind.GenericRepost`)for sharing non-kind1 events instead.
+   *
+   * See also [NIP-18](https://github.com/nostr-protocol/nips/blob/master/18.md).
+   */
   Repost = 6,
+  /**
+   * Contains a reaction to other events.
+   * It can contain "+" or "-" string, or an emoji,
+   * or [NIP-30](https://github.com/nostr-protocol/nips/blob/master/30.md) custom emoji as content.
+   *
+   * See also [NIP-25](https://github.com/nostr-protocol/nips/blob/master/25.md).
+   */
   Reaction = 7,
+  /**
+   * Contains a single `a` tag referencing BadgeDefinition event
+   * and one or more `p` tag, one for each pubkey the badge issuer wishes to award.
+   *
+   * See also kind30009 (`Kind.BadgeDefinition`), kind30008 (`Kind.ProfileBadges`),
+   * and [NIP-58](https://github.com/nostr-protocol/nips/blob/master/58.md)
+   */
   BadgeAward = 8,
+  /**
+   * Contains an event JSON that the user wants to share.
+   * It should be used for non-kind1 events. Use kind6 (`Kind.Repost`) to share kind1 (`Kind.Text`) events.
+   *
+   * See also [NIP-18](https://github.com/nostr-protocol/nips/blob/master/18.md)
+   */
   GenericRepost = 16,
   ChannelCreation = 40,
   ChannelMetadata = 41,
@@ -69,7 +126,11 @@ export enum Kind {
   HandlerInformation = 31990,
 }
 
-/** Key for tag query. Normally only the form `#` followed by a single-letter is permitted. See also [NIP-12](https://github.com/nostr-protocol/nips/blob/master/12.md). */
+/**
+ * Key for tag query. Normally only the form `#` followed by a single-letter is permitted.
+ *
+ * See also [NIP-12](https://github.com/nostr-protocol/nips/blob/master/12.md).
+ */
 export type TagName = `#${string}`;
 
 export type Filter = {
@@ -95,7 +156,7 @@ export namespace ToRelayMessage {
     [T in Any as T[0]]: T;
   }[T];
 
-  /** AUTH message. See also [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md). */
+  /** AUTH message.See also [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md). */
   export type AUTH = [type: "AUTH", event: Event<Kind.ClientAuthentication>];
   /** CLOSE message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type CLOSE = [type: "CLOSE", subId: string];
