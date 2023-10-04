@@ -30,3 +30,23 @@ const message: Nostr.ToRelayMessage.REQ = ["REQ", "subId", { kinds: [0] }];
 // NG. Required fields are missed so a type error occurs.
 const event: Nostr.Event = {};
 ```
+
+## Types
+
+For a complete list, see [index.d.ts](./index.d.ts).
+
+Particularly useful ones are listed below:
+
+- types
+  - `Event`
+  - `UnsignedEvent`
+  - `EventParameters`
+  - `Filter`
+- namespaces
+  - `Kind`
+  - `Tag`
+  - `Content`
+  - `ToRelayMessage`
+  - `ToClientMessage`
+  - `Nip07`
+  - `Nip11`
