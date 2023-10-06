@@ -16,7 +16,7 @@ npm install -S nostr-typedef
 If not, that is, if your application is not depended on anything else, you can put the dependency in `devDependencies` field.
 
 ```sh
-npm install -D nostr-typdef
+npm install -D nostr-typedef
 ```
 
 ## Example
