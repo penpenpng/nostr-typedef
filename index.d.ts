@@ -552,7 +552,7 @@ export namespace ToClientMessage {
     type: "OK",
     eventId: string,
     succeeded: boolean,
-    message?: OkMessageAnnotation | string
+    message: OkMessageAnnotation | string
   ];
 }
 
