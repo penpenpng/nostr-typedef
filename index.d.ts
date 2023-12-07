@@ -526,7 +526,7 @@ export namespace ToRelayMessage {
 /** JSON messages sent from relays to clients via WebSocket, and related types. */
 export namespace ToClientMessage {
   /** Possbile messages from clients to relays. */
-  export type Any = AUTH | COUNT | EOSE | EVENT | NOTICE | OK;
+  export type Any = AUTH | COUNT | EOSE | EVENT | CLOSED | NOTICE | OK;
   /** Message type, which is put at the first of message tuples. */
   export type Type = Any[0];
   /** Map message type to message. */
@@ -535,7 +535,7 @@ export namespace ToClientMessage {
   }[T];
 
   /** Message types exchanged in REQ subscriptions. */
-  export type Sub = EVENT | EOSE;
+  export type Sub = EVENT | EOSE | CLOSED;
 
   /** AUTH message. See also [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md). */
   export type AUTH = [type: "AUTH", challengeMessage: string];
@@ -545,6 +545,8 @@ export namespace ToClientMessage {
   export type EOSE = [type: "EOSE", subId: string];
   /** EVENT message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type EVENT = [type: "EVENT", subId: string, event: Event];
+  /** CLOSED message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
+  export type CLOSED = [type: "CLOSED", subId: string, message: string];
   /** NOTICE message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type NOTICE = [type: "NOTICE", message: string];
   /** OK message. See also [NIP-20](https://github.com/nostr-protocol/nips/blob/master/20.md). */
