@@ -546,7 +546,11 @@ export namespace ToClientMessage {
   /** EVENT message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type EVENT = [type: "EVENT", subId: string, event: Event];
   /** CLOSED message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
-  export type CLOSED = [type: "CLOSED", subId: string, message: string];
+  export type CLOSED = [
+    type: "CLOSED",
+    subId: string,
+    message: MachineReadablePrefixedMessage | string
+  ];
   /** NOTICE message. See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md). */
   export type NOTICE = [type: "NOTICE", message: string];
   /** OK message. See also [NIP-20](https://github.com/nostr-protocol/nips/blob/master/20.md). */
@@ -554,7 +558,7 @@ export namespace ToClientMessage {
     type: "OK",
     eventId: string,
     succeeded: boolean,
-    message: OkMessageAnnotation | string
+    message: MachineReadablePrefixedMessage | string
   ];
 }
 
@@ -563,7 +567,7 @@ export interface CountResponse {
 }
 
 /**
- * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#from-relay-to-client-sending-events-and-notices).
+ * See also [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md#from-relay-to-client-sending-events-and-notices) and [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md).
  */
 export type MachineReadablePrefix =
   | "duplicate"
@@ -571,19 +575,24 @@ export type MachineReadablePrefix =
   | "blocked"
   | "rate-limited"
   | "invalid"
-  | "error";
+  | "error"
+  | "auth-required"
+  | "restricted";
 
-export type OkMessageAnnotation = `${MachineReadablePrefix}:${string}`;
+export type MachineReadablePrefixedMessage =
+  `${MachineReadablePrefix}:${string}`;
+/** @deprecated Renamed. Use `MachineReadablePrefixedMessage` instead */
+export type OkMessageAnnotation = MachineReadablePrefixedMessage;
 
 export namespace Nip07 {
   export interface Nostr {
     getPublicKey: () => Promise<string>;
-    signEvent: (event: {
-      kind: number;
+    signEvent: <K extends number>(event: {
+      kind: K;
       tags: Tag.Any[];
       content: string;
       created_at: number;
-    }) => Promise<Event>;
+    }) => Promise<Event<K>>;
     getRelays?: () => Promise<GetRelayResult>;
     nip04?: Nip04Crypto;
   }
