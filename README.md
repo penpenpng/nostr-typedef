@@ -1,6 +1,6 @@
 # nostr-typedef
 
-**nostr-typdef** provides domain-specific type definitions (and useful doc comments) that are often needed to develop Nostr application with TypeScript.
+**nostr-typedef** provides domain-specific type definitions (and useful doc comments) that are often needed to develop Nostr application with TypeScript.
 It doesn't contain any implementations, but contains only type definitions.
 Therefore, it doesn't affect the bundle size of your application at all.
 
