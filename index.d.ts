@@ -308,7 +308,7 @@ export namespace Tag {
   /**
    * See [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md).
    */
-  export type relay = [tagNmae: "relay", relayUrl: string];
+  export type relay = [tagName: "relay", relayUrl: string];
 
   /**
    * See [NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md).
@@ -419,7 +419,7 @@ export namespace Content {
 
   /**
    * Content of Kind40-44.
-   * Metadata of a Publich Chat channel.
+   * Metadata of a Public Chat channel.
    *
    * See also [NIP-28](https://github.com/nostr-protocol/nips/blob/master/28.md).
    */
@@ -502,7 +502,7 @@ export type NostrConnectMethod = keyof NostrConnectPayloadMap;
 
 /** JSON messages sent from clients to relays via WebSocket, and related types. */
 export namespace ToRelayMessage {
-  /** Possbile messages from relays to clients. */
+  /** Possible messages from relays to clients. */
   export type Any = AUTH | CLOSE | COUNT | EVENT | REQ;
   /** Message type, which is put at the first of message tuples. */
   export type Type = Any[0];
@@ -525,7 +525,7 @@ export namespace ToRelayMessage {
 
 /** JSON messages sent from relays to clients via WebSocket, and related types. */
 export namespace ToClientMessage {
-  /** Possbile messages from clients to relays. */
+  /** Possible messages from clients to relays. */
   export type Any = AUTH | COUNT | EOSE | EVENT | CLOSED | NOTICE | OK;
   /** Message type, which is put at the first of message tuples. */
   export type Type = Any[0];
