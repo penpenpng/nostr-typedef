@@ -616,6 +616,13 @@ export type MachineReadablePrefixedMessage =
 /** @deprecated Renamed. Use `MachineReadablePrefixedMessage` instead */
 export type OkMessageAnnotation = MachineReadablePrefixedMessage;
 
+export namespace Nip05 {
+  export interface NostrAddress {
+    names: Record<string, string>;
+    relays?: Record<string, string[]>;
+  }
+}
+
 export namespace Nip07 {
   export interface Nostr {
     getPublicKey: () => Promise<string>;
