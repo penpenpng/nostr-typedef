@@ -230,10 +230,7 @@ export namespace Tag {
    *
    * See also [NIP-03](https://github.com/nostr-protocol/nips/blob/master/03.md).
    */
-  export type block = [
-    blockHeight: string,
-    blockHash: string,
-  ];
+  export type block = [blockHeight: string, blockHash: string];
 
   /**
    * Associate the tagged Kind0 (Metadata) Event with the specified external identity.
