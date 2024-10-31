@@ -11,7 +11,7 @@ export interface Event<K extends number = number> {
   pubkey: string;
   content: string;
   created_at: number;
-  /** See also [NIP-03](https://github.com/nostr-protocol/nips/blob/master/03.md). */
+  /** @deprecated Use kind 1040 (NIP-03) instead. */
   ots?: string;
 }
 
@@ -37,7 +37,7 @@ export interface EventParameters<K extends number = number> {
   pubkey?: string;
   content: string;
   created_at?: number;
-  /** See also [NIP-03](https://github.com/nostr-protocol/nips/blob/master/03.md). */
+  /** @deprecated Use kind 1040 (NIP-03) instead. */
   ots?: string;
 }
 
@@ -223,6 +223,16 @@ export namespace Tag {
     eventId: string,
     relayUrl?: string,
     marker?: EventMarker
+  ];
+
+  /**
+   * OpenTimestamps proof.
+   *
+   * See also [NIP-03](https://github.com/nostr-protocol/nips/blob/master/03.md).
+   */
+  export type block = [
+    blockHeight: string,
+    blockHash: string,
   ];
 
   /**
