@@ -641,6 +641,7 @@ export namespace Nip07 {
     }) => Promise<Event<K>>;
     getRelays?: () => Promise<GetRelayResult>;
     nip04?: Nip04Crypto;
+    nip44?: Nip44Crypto;
   }
 
   export interface GetRelayResult {
@@ -648,7 +649,22 @@ export namespace Nip07 {
   }
 
   export interface Nip04Crypto {
+    /**
+     * returns ciphertext and iv as specified in nip-04
+     * @deprecated Use `Nip44Crypto` instead
+     */
     encrypt: (pubkey: string, plaintext: string) => Promise<string>;
+    /**
+     * takes ciphertext and iv as specified in nip-04
+     * @deprecated Use `Nip44Crypto` instead
+     */
+    decrypt: (pubkey: string, ciphertext: string) => Promise<string>;
+  }
+
+  export interface Nip44Crypto {
+    /** returns ciphertext as specified in nip-44 */
+    encrypt: (pubkey: string, plaintext: string) => Promise<string>;
+    /** takes ciphertext as specified in nip-44 */
     decrypt: (pubkey: string, ciphertext: string) => Promise<string>;
   }
 }
