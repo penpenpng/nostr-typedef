@@ -675,6 +675,10 @@ export namespace Nip11 {
     name?: string;
     /** https://github.com/nostr-protocol/nips/blob/master/11.md#description */
     description?: string;
+    /** https://github.com/nostr-protocol/nips/blob/master/11.md#banner */
+    banner?: string;
+    /** https://github.com/nostr-protocol/nips/blob/master/11.md#icon */
+    icon?: string;
     /** https://github.com/nostr-protocol/nips/blob/master/11.md#pubkey */
     pubkey?: string;
     /** https://github.com/nostr-protocol/nips/blob/master/11.md#contact */
@@ -701,8 +705,6 @@ export namespace Nip11 {
     payments_url?: string;
     /** https://github.com/nostr-protocol/nips/blob/master/11.md#pay-to-relay */
     fees?: RelayFees;
-    /** https://github.com/nostr-protocol/nips/blob/master/11.md#icon */
-    icon?: string;
     [key: string]: unknown;
   }
 
@@ -712,12 +714,16 @@ export namespace Nip11 {
     max_filters?: number;
     max_limit?: number;
     max_subid_length?: number;
+    /** @deprecated Prefix search was removed from NIP-01. */
     min_prefix?: number;
     max_event_tags?: number;
     max_content_length?: number;
     min_pow_difficulty?: number;
     auth_required?: boolean;
     payment_required?: boolean;
+    restricted_writes?: boolean;
+    created_at_lower_limit?: number;
+    created_at_upper_limit?: number;
   }
 
   export interface EventRetention {
