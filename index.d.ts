@@ -463,9 +463,10 @@ export namespace Content {
    * See also [NIP-28](https://github.com/nostr-protocol/nips/blob/master/28.md).
    */
   export interface PublicChatChannelMetadata {
-    name: string;
-    about: string;
-    picture: string;
+    name?: string;
+    about?: string;
+    picture?: string;
+    relays?: string[];
   }
 
   /**
